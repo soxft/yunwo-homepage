@@ -1,3 +1,4 @@
+"use client"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,6 +28,16 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+
+type osMatrix = {
+  name: string
+  description: string
+  status: "available" | "upcoming"
+  version?: string
+  note?: string
+  action?: () => void
+  action_str?: string
+}
 
 const featureHighlights = [
   {
@@ -70,23 +81,25 @@ const capabilityCards = [
 const plans = [
   {
     name: "个人版",
-    price: "¥0",
+    price: "联系我们",
     description: "适合独立顾问、自由职业者，快速体验智能知识整理与检索。",
     highlights: [
-      "单人使用，支持 3 个知识空间",
+      "单人使用",
+      "可选增值工具",
       "内置 AI 助手与全文检索",
-      "支持导入常见 Office、PDF 文档",
+      "支持导入常见 Office、PDF 文档等",
     ],
     cta: "立即使用",
   },
   {
     name: "团队版",
-    price: "¥499/月",
+    price: "联系我们",
     description: "覆盖跨部门协同场景，助力团队构建共享知识资产。",
     highlights: [
-      "最多 200 名成员，支持角色与权限管理",
-      "与企业微信、飞书等消息系统集成",
-      "知识生命周期管理与运营仪表盘",
+      "个人版全部功能",
+      "自定义成员数，支持角色与权限管理",
+      "企业知识库支持, 可选行业知识库",
+      "企业共享备忘录支持",
     ],
     cta: "预约演示",
   },
@@ -97,32 +110,48 @@ const plans = [
     highlights: [
       "专属 VPC 或本地化部署架构",
       "可定制的安全策略与审计报表",
-      "专属成功经理与 SLA 服务保障",
+      "专属成功经理, 计划支持服务",
     ],
     cta: "获取报价",
   },
 ];
 
-const osMatrix = [
+const osMatrix: osMatrix[] = [
   {
     name: "Windows",
     description: "适配 Windows 10 及以上版本，覆盖主流企业桌面环境。",
     status: "available",
-    version: "v2.3.1",
-    action: "下载 Windows 版",
+    version: "v1.0.0",
+    action_str: "下载 Windows 版",
+    action: () => {
+      alert("敬请期待")
+    }
   },
   {
     name: "macOS",
     description: "兼容 Apple Silicon 与 Intel 芯片，为创意与研发团队提供一致体验。",
     status: "available",
-    version: "v2.3.1",
-    action: "下载 macOS 版",
+    version: "v1.0.0",
+    action_str: "下载 macOS 版",
+    action: () => {
+      alert("敬请期待")
+    }
+  },
+  {
+    name: "Web",
+    description: "通过浏览器访问，具备完整功能，可与桌面端同步协作。",
+    status: "available",
+    version: "即时访问",
+    action_str: "打开 Web 端",
+    action: () => {
+      window.open("http://production.knowledge.zhengcloud.ltd")
+    }
   },
   {
     name: "Linux",
     description: "覆盖主流桌面发行版的构建计划已在进行中。",
     status: "upcoming",
-    note: "预计 Q4 发布",
+    note: "研发中", // 预计 Q4 发布
   },
   {
     name: "Android",
@@ -134,14 +163,7 @@ const osMatrix = [
     name: "iOS",
     description: "原生客户端设计中，确保移动办公与安全策略的一致。",
     status: "upcoming",
-    note: "研发中",
-  },
-  {
-    name: "Web",
-    description: "通过浏览器访问，具备完整功能，可与桌面端同步协作。",
-    status: "available",
-    version: "即时访问",
-    action: "打开 Web 端",
+    note: "敬请期待",
   },
 ];
 
@@ -166,9 +188,9 @@ export default function Home() {
                 <Button size="lg" className="gap-2">
                   <Sparkles className="h-4 w-4" /> 立即体验 Demo
                 </Button>
-                <Button variant="outline" size="lg" className="gap-2">
+                {/* <Button variant="outline" size="lg" className="gap-2">
                   <Users className="h-4 w-4" /> 预约专属方案
-                </Button>
+                </Button> */}
               </div>
               <TabsList className="mt-2">
                 <TabsTrigger value="overview">产品总览</TabsTrigger>
@@ -336,8 +358,16 @@ export default function Home() {
                             <span>最新版本</span>
                             <span className="font-medium text-primary">{os.version}</span>
                           </div>
-                          <Button className="gap-2" variant="default">
-                            <CloudDownload className="h-4 w-4" /> {os.action}
+                          <Button
+                            className="gap-2"
+                            variant="default"
+                            onClick={() => {
+                              if (typeof os.action == "function") {
+                                os.action();
+                              }
+                            }}
+                          >
+                            <CloudDownload className="h-4 w-4" /> {os.action_str}
                           </Button>
                         </>
                       ) : (
@@ -350,7 +380,7 @@ export default function Home() {
                 ))}
               </section>
 
-              <Card className="border-dashed border-primary/20 bg-muted/60">
+              {/* <Card className="border-dashed border-primary/20 bg-muted/60">
                 <CardContent className="flex flex-col items-center gap-4 p-8 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
                   <div className="flex flex-col gap-2">
                     <h3 className="text-2xl font-semibold text-primary">
@@ -364,7 +394,7 @@ export default function Home() {
                     <Users className="h-4 w-4" /> 申请加入共创计划
                   </Button>
                 </CardContent>
-              </Card>
+              </Card> */}
             </TabsContent>
 
             <TabsContent value="plans" className="space-y-10">
