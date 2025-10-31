@@ -28,6 +28,9 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import Orb from "@/components/Orb";
+import DotGrid from "@/components/DotGrid";
+import Particles from "@/components/Particles";
 
 type osMatrix = {
   name: string
@@ -169,11 +172,43 @@ const osMatrix: osMatrix[] = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100">
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 sm:px-12 pt-24">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-b from-slate-50 via-white to-slate-100">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <Particles
+          className="h-full w-full opacity-60"
+          particleCount={420}
+          particleSpread={12}
+          particleColors={["#a855f7", "#38bdf8", "#facc15"]}
+          particleBaseSize={75}
+          sizeRandomness={0.4}
+          speed={0.25}
+          alphaParticles
+        />
+      </div>
+      <div className="pointer-events-none absolute left-1/2 top-24 hidden h-80 w-80 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl md:block" />
+      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pt-24 sm:px-12">
         <Tabs defaultValue="overview" className="w-full">
           <div className="flex flex-col gap-12">
-            <div className="flex flex-col items-center gap-6 text-center">
+            <div className="relative flex flex-col items-center gap-6 text-center">
+              <div className="pointer-events-none absolute inset-0 hidden sm:block">
+                <DotGrid
+                  className="absolute inset-0 hidden p-0 opacity-40 pointer-events-none sm:flex"
+                  dotSize={12}
+                  gap={28}
+                  baseColor="#c084fc"
+                  activeColor="#38bdf8"
+                  proximity={160}
+                  shockRadius={240}
+                  shockStrength={6}
+                  returnDuration={1.8}
+                />
+              </div>
+              <div className="pointer-events-none absolute -top-24 right-0 hidden h-64 w-64 opacity-70 sm:block sm:translate-x-10 md:-top-32 md:h-80 md:w-80 md:translate-x-16">
+                <Orb hue={220} hoverIntensity={0.5} rotateOnHover={false} forceHoverState />
+              </div>
+              <div className="pointer-events-none absolute -bottom-24 left-0 hidden h-48 w-48 opacity-60 blur-sm sm:block sm:-translate-x-8 md:-bottom-32 md:h-60 md:w-60 md:-translate-x-12">
+                <Orb hue={320} hoverIntensity={0.5} rotateOnHover={false} forceHoverState />
+              </div>
               <Badge className="px-4 py-1 text-sm font-medium">
                 运幄 AI 知识库 · 企业级智能知识中枢
               </Badge>
@@ -218,7 +253,10 @@ export default function Home() {
                 ))}
               </section>
 
-              <section className="grid gap-6 rounded-3xl border border-dashed border-primary/20 bg-white/70 p-8 shadow-sm backdrop-blur-sm md:grid-cols-2 md:p-12">
+              <section className="relative grid gap-6 overflow-hidden rounded-3xl border border-dashed border-primary/20 bg-white/70 p-8 shadow-sm backdrop-blur-sm md:grid-cols-2 md:p-12">
+                <div className="pointer-events-none absolute -top-24 right-12 hidden h-48 w-48 opacity-60 sm:block">
+                  <Orb hue={180} hoverIntensity={0.4} rotateOnHover={false} forceHoverState />
+                </div>
                 <div className="flex flex-col gap-4">
                   <Badge variant="success" className="self-start px-3 py-1">
                     智能知识运营中心
@@ -284,8 +322,11 @@ export default function Home() {
                 ))}
               </section>
 
-              <Card className="overflow-hidden border-0 bg-primary text-primary-foreground">
-                <CardContent className="flex flex-col gap-8 p-10 lg:flex-row lg:items-center lg:justify-between">
+              <Card className="relative overflow-hidden border-0 bg-primary text-primary-foreground">
+                <div className="pointer-events-none absolute -top-16 left-10 hidden h-48 w-48 opacity-60 lg:block">
+                  <Orb hue={80} hoverIntensity={0.3} rotateOnHover={false} forceHoverState />
+                </div>
+                <CardContent className="relative z-10 flex flex-col gap-8 p-10 lg:flex-row lg:items-center lg:justify-between">
                   <div className="flex flex-col gap-3">
                     <Badge variant="success" className="w-fit bg-white/10 text-primary-foreground">
                       数据驱动 · 决策加速
@@ -318,7 +359,10 @@ export default function Home() {
             </TabsContent>
 
             <TabsContent value="download" className="space-y-10">
-              <section className="rounded-3xl border border-primary/10 bg-white/80 p-8 backdrop-blur-sm">
+              <section className="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 p-8 backdrop-blur-sm">
+                <div className="pointer-events-none absolute -top-16 right-6 hidden h-40 w-40 opacity-70 sm:block">
+                  <Orb hue={260} hoverIntensity={0.3} rotateOnHover={false} forceHoverState />
+                </div>
                 <div className="flex flex-col gap-4 text-center">
                   <Badge variant="success" className="mx-auto w-fit px-3 py-1">
                     全端覆盖 · 一键部署
@@ -333,7 +377,8 @@ export default function Home() {
                 </div>
               </section>
 
-              <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <section className="relative grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div className="pointer-events-none absolute inset-0 -z-10 hidden rounded-3xl bg-linear-to-br from-primary/10 via-white/10 to-transparent blur-2xl lg:block" />
                 {osMatrix.map((os) => (
                   <Card key={os.name} className="flex h-full flex-col justify-between">
                     <CardHeader>
@@ -400,7 +445,10 @@ export default function Home() {
             </TabsContent>
 
             <TabsContent value="plans" className="space-y-10">
-              <section className="rounded-3xl border border-primary/10 bg-white/80 p-8 backdrop-blur-sm text-center">
+              <section className="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 p-8 backdrop-blur-sm text-center">
+                <div className="pointer-events-none absolute -bottom-20 right-12 hidden h-48 w-48 opacity-70 sm:block">
+                  <Orb hue={120} hoverIntensity={0.3} rotateOnHover={false} forceHoverState />
+                </div>
                 <Badge variant="success" className="mx-auto w-fit px-3 py-1">
                   灵活套餐 · 伴随成长
                 </Badge>
@@ -412,7 +460,8 @@ export default function Home() {
                 </p>
               </section>
 
-              <section className="grid gap-6 md:grid-cols-3">
+              <section className="relative grid gap-6 md:grid-cols-3">
+                <div className="pointer-events-none absolute inset-0 -z-10 hidden rounded-3xl border border-primary/15 bg-white/40 blur-xl md:block" />
                 {plans.map((plan) => (
                   <Card key={plan.name} className="flex h-full flex-col justify-between border-primary/10">
                     <CardHeader className="space-y-3">
@@ -447,7 +496,7 @@ export default function Home() {
         </Tabs>
       </main>
 
-      <footer className="border-t border-border/80 bg-muted/20 mt-10">
+  <footer className="relative z-10 mt-10 border-t border-border/80 bg-muted/20">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 text-center sm:px-6 md:flex-row md:items-center md:justify-between md:text-left">
           <div className="space-y-3">
             <Badge variant="default" className="uppercase tracking-[0.35em]">
