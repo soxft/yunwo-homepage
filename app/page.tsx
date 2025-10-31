@@ -188,9 +188,11 @@ export default function Home() {
                 <Button size="lg" className="gap-2">
                   <Sparkles className="h-4 w-4" /> 立即体验
                 </Button>
-                {/* <Button variant="outline" size="lg" className="gap-2">
-                  <Users className="h-4 w-4" /> 预约专属方案
-                </Button> */}
+                <Button variant="outline" size="lg" className="gap-2" asChild>
+                  <Link href="https://doc.yunwoai.com" target="_blank" rel="noopener noreferrer">
+                    📖 使用说明
+                  </Link>
+                </Button>
               </div>
               <TabsList className="mt-2 text-base">
                 <TabsTrigger value="overview" className="text-base">产品总览</TabsTrigger>
