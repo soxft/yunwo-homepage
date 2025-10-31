@@ -59,18 +59,47 @@ const capabilityCards = [
     icon: ShieldCheck,
   },
   {
-    title: "生态级集成",
+    title: "生态级集成中心",
     description:
-      "开放 API 与插件，快速串联现有 IM、工单、CRM 等系统，打通业务链路。",
+      "通过标准化连接器与开放 API，将知识服务嵌入 IM、OA、工单、CRM 等核心系统，实现跨域业务联动。",
     icon: Link2,
   },
 ];
 
-const metrics = [
-  { label: "知识命中率", value: "98%" },
-  { label: "部署周期", value: "< 2 周" },
-  { label: "知识贡献增长", value: "3.6x" },
-  { label: "满意度", value: "4.9/5" },
+const plans = [
+  {
+    name: "个人版",
+    price: "¥0",
+    description: "适合独立顾问、自由职业者，快速体验智能知识整理与检索。",
+    highlights: [
+      "单人使用，支持 3 个知识空间",
+      "内置 AI 助手与全文检索",
+      "支持导入常见 Office、PDF 文档",
+    ],
+    cta: "立即使用",
+  },
+  {
+    name: "团队版",
+    price: "¥499/月",
+    description: "覆盖跨部门协同场景，助力团队构建共享知识资产。",
+    highlights: [
+      "最多 200 名成员，支持角色与权限管理",
+      "与企业微信、飞书等消息系统集成",
+      "知识生命周期管理与运营仪表盘",
+    ],
+    cta: "预约演示",
+  },
+  {
+    name: "私有部署",
+    price: "联系我们",
+    description: "满足金融、政企行业的安全与合规需求，提供专属定制能力。",
+    highlights: [
+      "专属 VPC 或本地化部署架构",
+      "可定制的安全策略与审计报表",
+      "专属成功经理与 SLA 服务保障",
+    ],
+    cta: "获取报价",
+  },
 ];
 
 const osMatrix = [
@@ -143,6 +172,7 @@ export default function Home() {
               <TabsList className="mt-2">
                 <TabsTrigger value="overview">产品总览</TabsTrigger>
                 <TabsTrigger value="download">客户端下载</TabsTrigger>
+                <TabsTrigger value="plans">方案套餐</TabsTrigger>
               </TabsList>
             </div>
 
@@ -163,7 +193,7 @@ export default function Home() {
                 ))}
               </section>
 
-              <section className="grid gap-6 rounded-3xl border border-dashed border-primary/20 bg-white/70 p-8 shadow-sm backdrop-blur-sm md:grid-cols-[2fr,3fr] md:p-12">
+              <section className="grid gap-6 rounded-3xl border border-dashed border-primary/20 bg-white/70 p-8 shadow-sm backdrop-blur-sm md:grid-cols-2 md:p-12">
                 <div className="flex flex-col gap-4">
                   <Badge variant="success" className="self-start px-3 py-1">
                     智能知识运营中心
@@ -189,18 +219,27 @@ export default function Home() {
                     </li>
                   </ul>
                 </div>
-                <Card className="grid grid-cols-2 gap-4 border-none bg-slate-900 text-slate-100">
-                  {metrics.map((metric) => (
-                    <CardContent
-                      key={metric.label}
-                      className="flex flex-col items-start justify-center gap-2 rounded-2xl bg-white/10 p-6"
-                    >
-                      <span className="text-sm uppercase tracking-wide text-white/70">
-                        {metric.label}
-                      </span>
-                      <span className="text-3xl font-semibold">{metric.value}</span>
-                    </CardContent>
-                  ))}
+                <Card className="flex flex-col gap-4 border-none bg-slate-900 p-8 text-slate-100">
+                  <CardContent className="space-y-4 p-0">
+                    <h3 className="text-2xl font-semibold">业务协同一体化</h3>
+                    <p className="text-base text-white/80">
+                      基于知识图谱与工作流引擎，让内容、流程、数据在统一空间流转，帮助业务团队快速适配复杂场景。
+                    </p>
+                    <ul className="space-y-3 text-sm text-white/70">
+                      <li className="flex items-start gap-3">
+                        <Network className="mt-0.5 h-5 w-5 text-primary" />
+                        <span>跨系统推送与订阅机制，实时联动内外部系统。</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <BadgeCheck className="mt-0.5 h-5 w-5 text-primary" />
+                        <span>预置知识治理规范，确保内容持续可靠与可审计。</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <Users className="mt-0.5 h-5 w-5 text-primary" />
+                        <span>支持多团队协同编写、评审与发布，提升知识响应速度。</span>
+                      </li>
+                    </ul>
+                  </CardContent>
                 </Card>
               </section>
 
@@ -325,6 +364,51 @@ export default function Home() {
                   </Button>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="plans" className="space-y-10">
+              <section className="rounded-3xl border border-primary/10 bg-white/80 p-8 backdrop-blur-sm text-center">
+                <Badge variant="success" className="mx-auto w-fit px-3 py-1">
+                  灵活套餐 · 伴随成长
+                </Badge>
+                <h2 className="mt-4 text-3xl font-semibold text-primary">
+                  根据团队阶段选择合适的运幄知识引擎方案
+                </h2>
+                <p className="mx-auto mt-3 max-w-2xl text-lg text-muted-foreground">
+                  从个人试用到企业级私有化部署，我们提供覆盖全业务场景的灵活选择，并支持按需扩展服务能力。
+                </p>
+              </section>
+
+              <section className="grid gap-6 md:grid-cols-3">
+                {plans.map((plan) => (
+                  <Card key={plan.name} className="flex h-full flex-col justify-between border-primary/10">
+                    <CardHeader className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-2xl text-primary">{plan.name}</CardTitle>
+                        <Badge variant="neutral" className="text-xs">
+                          {plan.price}
+                        </Badge>
+                      </div>
+                      <CardDescription className="text-base leading-7">
+                        {plan.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-1 flex-col gap-4">
+                      <ul className="space-y-3 text-sm text-muted-foreground">
+                        {plan.highlights.map((item) => (
+                          <li key={item} className="flex items-start gap-2">
+                            <BadgeCheck className="mt-0.5 h-4 w-4 text-primary" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Button className="mt-auto gap-2" variant={plan.name === "个人版" ? "default" : "outline"}>
+                        <Sparkles className="h-4 w-4" /> {plan.cta}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </section>
             </TabsContent>
           </div>
         </Tabs>
