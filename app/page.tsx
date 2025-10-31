@@ -26,6 +26,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
+import Link from "next/link";
 
 const featureHighlights = [
   {
@@ -146,8 +147,8 @@ const osMatrix = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-24">
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 sm:px-12">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 sm:px-12 pt-24">
         <Tabs defaultValue="overview" className="w-full">
           <div className="flex flex-col gap-12">
             <div className="flex flex-col items-center gap-6 text-center">
@@ -215,7 +216,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Boxes className="mt-0.5 h-5 w-5 text-primary" />
-                      <span>开放式插件市场，支持将知识快速嵌入现有业务流程。</span>
+                      <span>良好的集成与拓展性，支持将知识快速嵌入现有业务流程。</span>
                     </li>
                   </ul>
                 </div>
@@ -228,7 +229,7 @@ export default function Home() {
                     <ul className="space-y-3 text-sm text-white/70">
                       <li className="flex items-start gap-3">
                         <Network className="mt-0.5 h-5 w-5 text-primary" />
-                        <span>跨系统推送与订阅机制，实时联动内外部系统。</span>
+                        <span>完善的行业知识数据库, 节省大量知识储备时间。</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <BadgeCheck className="mt-0.5 h-5 w-5 text-primary" />
@@ -236,7 +237,7 @@ export default function Home() {
                       </li>
                       <li className="flex items-start gap-3">
                         <Users className="mt-0.5 h-5 w-5 text-primary" />
-                        <span>支持多团队协同编写、评审与发布，提升知识响应速度。</span>
+                        <span>支持多团队成员协同编写、发布，提升知识响应速度。</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -413,6 +414,31 @@ export default function Home() {
           </div>
         </Tabs>
       </main>
+
+      <footer className="border-t border-border/80 bg-muted/20 mt-10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 text-center sm:px-6 md:flex-row md:items-center md:justify-between md:text-left">
+          <div className="space-y-3">
+            <Badge variant="default" className="uppercase tracking-[0.35em]">
+              GET STARTED
+            </Badge>
+            <h3 className="text-2xl font-semibold text-foreground">
+              即刻使用 运幄AI知识库
+            </h3>
+            <p className="text-sm leading-7 text-muted-foreground">
+              将工作掌控在运筹帷幄之中，做到马到功成。
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 md:items-end">
+            <Button asChild aria-label="立即注册体验" className="w-full md:w-auto">
+              <Link href="#">立即体验</Link>
+            </Button>
+            <div className="flex flex-row gap-2">
+              <span className="text-xs text-muted-foreground">Copyright © 2025 运幄知识库</span>
+              <span className="text-xs text-muted-foreground"><Link href="https://beian.miit.gov.cn/">浙ICP备20029288号-2</Link></span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
