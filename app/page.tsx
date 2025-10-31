@@ -178,22 +178,22 @@ const heroStats = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-sky-50 via-white to-blue-50 text-slate-900">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-sky-50 via-sky-50/40 to-indigo-50 text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-0 -top-72 flex justify-center opacity-70">
-          <div className="h-[540px] w-[540px] rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.25)_0%,transparent_65%)] blur-3xl" />
+          <div className="h-[540px] w-[540px] rounded-full bg-[radial-gradient(circle_at_center,rgba(147,197,253,0.38)_0%,rgba(191,219,254,0.2)_45%,transparent_78%)] blur-3xl" />
         </div>
         <div className="absolute inset-x-0 top-1/3 flex justify-center opacity-60">
-          <div className="h-[480px] w-[820px] rounded-[42%] bg-[radial-gradient(circle_at_center,rgba(147,197,253,0.25)_0%,transparent_70%)] blur-3xl" />
+          <div className="h-[480px] w-[820px] rounded-[42%] bg-[radial-gradient(circle_at_center,rgba(165,215,252,0.28)_0%,rgba(191,219,254,0.16)_50%,transparent_82%)] blur-3xl" />
         </div>
         <div className="absolute inset-x-0 bottom-0 flex justify-center">
-          <div className="h-[360px] w-full bg-linear-to-t from-sky-100 via-transparent" />
+          <div className="h-[360px] w-full bg-linear-to-t from-sky-100/70 via-transparent" />
         </div>
       </div>
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-32 pt-24 sm:px-10 md:gap-28 lg:px-12">
         <section className="relative isolate overflow-hidden rounded-3xl border border-sky-100 bg-white/90 p-10 shadow-[0_40px_120px_-60px_rgba(29,78,216,0.35)] backdrop-blur-sm sm:p-16">
-          <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.25)_0%,transparent_70%)] opacity-60" />
+          <div className="absolute right-0 top-0 h-full w-[65%] bg-[radial-gradient(circle_at_top_right,rgba(191,219,254,0.35)_0%,rgba(219,234,254,0.22)_42%,transparent_85%)] opacity-60" />
           <div className="relative flex flex-col gap-12 lg:flex-row lg:items-center">
             <div className="flex-1 space-y-10">
               <div className="space-y-4">
@@ -463,10 +463,10 @@ export default function Home() {
             ))}
           </div>
         </section>
-    </main>
+      </main>
 
-    <footer className="relative border-t border-sky-100 bg-white/90">
-        <div className="mx-auto flex w/full max-w-6xl flex-col gap-8 px-6 py-12 sm:px-10 md:flex-row md:items-center md:justify-between">
+      <footer className="relative border-t border-sky-100 bg-white/90">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-12 sm:px-10 md:flex-row md:items-center md:justify-between">
           <div className="space-y-4">
             <Badge className="w-fit rounded-full bg-linear-to-r from-sky-200 via-blue-200 to-indigo-200 text-[11px] uppercase tracking-[0.34em] text-sky-900 ring-1 ring-sky-300">
               TAKE ACTION
