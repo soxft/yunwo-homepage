@@ -124,7 +124,7 @@ const osMatrix: osMatrix[] = [
     version: "v1.0.0",
     action_str: "下载 Windows 版",
     action: () => {
-      alert("敬请期待")
+      window.open("https://dl.yunwoai.com/yunwo/%E8%BF%90%E5%B9%84AI%E7%9F%A5%E8%AF%86%E5%BA%93%20Setup%200.1.0.exe")
     }
   },
   {
@@ -134,7 +134,7 @@ const osMatrix: osMatrix[] = [
     version: "v1.0.0",
     action_str: "下载 macOS 版",
     action: () => {
-      alert("敬请期待")
+      window.open("https://dl.yunwoai.com/yunwo/%E8%BF%90%E5%B9%84AI%E7%9F%A5%E8%AF%86%E5%BA%93-0.1.0-arm64.dmg")
     }
   },
   {
@@ -186,16 +186,16 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Button size="lg" className="gap-2">
-                  <Sparkles className="h-4 w-4" /> 立即体验 Demo
+                  <Sparkles className="h-4 w-4" /> 立即体验
                 </Button>
                 {/* <Button variant="outline" size="lg" className="gap-2">
                   <Users className="h-4 w-4" /> 预约专属方案
                 </Button> */}
               </div>
-              <TabsList className="mt-2">
-                <TabsTrigger value="overview">产品总览</TabsTrigger>
-                <TabsTrigger value="download">客户端下载</TabsTrigger>
-                <TabsTrigger value="plans">方案套餐</TabsTrigger>
+              <TabsList className="mt-2 text-base">
+                <TabsTrigger value="overview" className="text-base">产品总览</TabsTrigger>
+                <TabsTrigger value="download" className="text-base">客户端下载</TabsTrigger>
+                <TabsTrigger value="plans" className="text-base">方案套餐</TabsTrigger>
               </TabsList>
             </div>
 
