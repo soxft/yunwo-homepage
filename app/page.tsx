@@ -550,13 +550,13 @@ export default function Home() {
                                 <p className="text-xs text-slate-500">{item.description}</p>
                               </div>
                               <div className="flex items-center gap-3 self-start sm:self-center">
-                                <div className="text-right text-[10px] uppercase tracking-[0.24em] text-slate-400 leading-tight">
+                                <div className="w-20 text-right text-[10px] uppercase tracking-[0.24em] text-slate-400 leading-tight">
                                   <span className="block">版本</span>
                                   <span className="block text-sm font-semibold text-sky-600">{item.version}</span>
                                 </div>
                                 <Button
                                   size="sm"
-                                  className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
+                                  className="min-w-[150px] justify-center gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
                                   onClick={() => item.action?.()}
                                 >
                                   <CloudDownload className="h-3 w-3" /> {item.cta}
