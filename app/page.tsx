@@ -69,6 +69,13 @@ const capabilityCards = [
   },
 ];
 
+const workspaceTags = [
+  "多模态检索",
+  "分区治理",
+  "权限审计",
+  "协作共享",
+];
+
 const plans = [
   {
     name: "个人版",
@@ -191,22 +198,28 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-32 pt-24 sm:px-10 md:gap-28 lg:px-12">
-        <section className="relative isolate overflow-hidden rounded-3xl border border-sky-100 bg-white/90 p-10 shadow-[0_40px_120px_-60px_rgba(29,78,216,0.35)] backdrop-blur-sm sm:p-16">
-          <div className="absolute right-0 top-0 h-full w-[65%] bg-[radial-gradient(circle_at_top_right,rgba(191,219,254,0.35)_0%,rgba(219,234,254,0.22)_42%,transparent_85%)] opacity-60" />
-          <div className="relative flex flex-col gap-12 lg:flex-row lg:items-center">
-            <div className="flex-1 space-y-10">
+      <main className="relative mx-auto flex w-full max-w-7xl flex-col gap-24 px-6 pb-32 pt-24 sm:px-10 md:px-12 lg:px-16 xl:px-20 md:gap-28">
+        <section className="relative isolate overflow-hidden">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -left-32 top-0 h-80 w-80 rounded-full" />
+            <div className="absolute -right-24 top-12 h-96 w-96 rounded-[36%]" />
+          </div>
+
+          <div className="relative flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
+            <div className="space-y-9 lg:basis-[58%]">
               <div className="space-y-4">
-                <Badge className="w-fit rounded-full bg-linear-to-r from-sky-200 via-blue-200 to-indigo-200 text-[11px] font-semibold uppercase tracking-[0.32em] text-sky-900 ring-1 ring-sky-300">
-                  运幄 AI 知识库 · 智能知识中枢
+                <Badge className="w-fit rounded-full bg-linear-to-r from-sky-100 via-blue-100 to-indigo-100 text-[11px] font-semibold uppercase tracking-[0.32em] text-sky-900 ring-1 ring-sky-200">
+                  运幄 AI 知识库 · 纵览
                 </Badge>
                 <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                  以 AI 驱动知识流动，让组织判断更快、行动更准
+                  <span className="block text-sky-700">让知识治理跨越</span>
+                  <span className="block text-slate-900">效率与安全的边界</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-600">
-                  运幄以数据智能、语义洞察与安全治理为底座，将分散知识资产汇聚成高价值的企业大脑，帮助团队实现从信息到决策的全程提效。
+                  运幄以三级知识库分区、笔记系统和多端协同为底座，结合智能检索、数据洞察与安全合规，帮助团队把零散资料沉淀为可复用的企业大脑。
                 </p>
               </div>
+
               <div className="flex flex-wrap items-center gap-4">
                 <Button
                   size="lg"
@@ -223,56 +236,84 @@ export default function Home() {
                   className="gap-2 rounded-full border-sky-200 bg-sky-50/80 px-8 text-sky-700 hover:bg-sky-100"
                   asChild
                 >
-                  <Link href="https://doc.yunwoai.com" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://yunwo-ai.feishu.cn/wiki/Rd4Qw0qmriogkLkDqZRc5mctnBg" target="_blank" rel="noopener noreferrer">
                     📖 查看教程
                   </Link>
                 </Button>
               </div>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {heroStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm shadow-sky-100/60"
-                  >
-                    <p className="text-2xl font-semibold text-sky-600 sm:text-3xl">{stat.value}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">{stat.label}</p>
-                    <p className="mt-3 text-sm text-slate-500">{stat.description}</p>
-                  </div>
-                ))}
-              </div>
+
             </div>
-            <Card className="flex w-full max-w-md flex-col gap-6 border border-sky-100 bg-white p-8 shadow-[0_35px_80px_-50px_rgba(37,99,235,0.45)]">
-              <CardContent className="flex flex-col gap-6 p-0">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                    <Network className="h-6 w-6" />
+
+            <div className="space-y-5 lg:basis-[42%]">
+              <Card className="relative w-full border border-sky-100/80 bg-linear-to-br from-white via-white to-sky-50 shadow-[0_35px_90px_-55px_rgba(37,99,235,0.35)]">
+                <CardContent className="relative flex flex-col gap-6 p-8">
+                  <div className="absolute left-8 right-8 top-6 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-rose-200" />
+                      <span className="h-3 w-3 rounded-full bg-amber-200" />
+                      <span className="h-3 w-3 rounded-full bg-emerald-200" />
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-sky-600/80">Knowledge Workspace</p>
-                    <h3 className="text-xl font-semibold text-slate-900">多端协同的知识中枢</h3>
+
+                  <div className="pt-10 space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      {workspaceTags.map((tag) => (
+                        <Badge key={tag} className="rounded-full bg-sky-50 text-sky-700 ring-1 ring-sky-100">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <p className="text-sm leading-7 text-slate-600">
-                  集合智能搜索、笔记系统与知识库分区能力，在桌面端与网页端之间保持统一体验，帮助团队随时记录并分享信息。
-                </p>
-                <div className="grid gap-4">
-                  {featureHighlights.map((feature) => (
-                    <div key={feature.title} className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                        <feature.icon className="h-5 w-5" />
+
+                  <div className="rounded-2xl border border-sky-100/80 bg-sky-50/70 p-4">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sky-600 shadow-inner">
+                        <Sparkles className="h-5 w-5" />
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-slate-900">{feature.title}</p>
-                        <p className="text-xs text-slate-500">{feature.description}</p>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm font-semibold text-slate-900">AI 逻辑校验器</p>
+                          <span className="text-[11px] uppercase tracking-[0.2em] text-slate-400">智能治理</span>
+                        </div>
+                        <p className="text-xs text-slate-500">
+                          每次检索数据库后都会提炼优质总结，并借助智能分析自动识别冲突、冗余与权限风险，给出可执行修正建议。
+                        </p>
+                        <div className="h-2 rounded-full bg-white/80 shadow-inner">
+                          <div className="h-full w-[68%] rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500" />
+                        </div>
+                        <p className="text-[11px] text-slate-400">
+                          建议在当前分区补充业务流程节点，降低检索偏差，确保知识沉淀可复用。
+                        </p>
                       </div>
                     </div>
-                  ))}
-                </div>
-                <Badge variant="success" className="w-fit rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-sky-900 ring-sky-200/60">
-                  Enterprise Ready · Zero Trust
-                </Badge>
-              </CardContent>
-            </Card>
+                  </div>
+
+                  <div className="grid gap-3 rounded-2xl border border-sky-100/70 bg-white/90 p-4 shadow-sm">
+                    {featureHighlights.map((feature) => (
+                      <div key={feature.title} className="flex items-start gap-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sky-600">
+                          <feature.icon className="h-4 w-4" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-slate-900">{feature.title}</p>
+                          <p className="text-xs text-slate-500">{feature.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-end gap-3 rounded-xl bg-sky-50/80 px-4 py-3 text-sm text-slate-700">
+                    <span className="flex justify-center gap-2 text-slate-700">
+                      <Network className="h-4 w-4 text-sky-500" />
+                      <span>桌面/Web</span>
+                    </span>
+                    <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-sky-900 ring-sky-200/60">
+                      Enterprise Ready
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
 
