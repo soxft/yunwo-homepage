@@ -207,17 +207,36 @@ const heroStats = [
 ];
 
 export default function Home() {
-  const downloadDesktop = () => {
-    if (typeof window === "undefined") return;
+
+  type Plat = "windows" | "macos";
+
+  const getPlatform = (): Plat | "unknown" => {
+    if (typeof window === "undefined") return "unknown"
+
     const ua = window.navigator.userAgent.toLowerCase();
     const isMac = ua.includes("mac os");
     const mac = availableOS.find((item) => item.name === "macOS");
     const win = availableOS.find((item) => item.name === "Windows");
     if (isMac && mac?.action) {
+      return "macos";
+    }
+    if (!isMac && win?.action) {
+      return "windows";
+    }
+    return "unknown";
+  }
+
+  const downloadDesktop = () => {
+    const platform = getPlatform();
+
+    const mac = availableOS.find((item) => item.name === "macOS");
+    const win = availableOS.find((item) => item.name === "Windows");
+
+    if (platform === "macos" && mac?.action) {
       mac.action();
       return;
     }
-    if (!isMac && win?.action) {
+    if (platform === "windows" && win?.action) {
       win.action();
       return;
     }
@@ -484,7 +503,7 @@ export default function Home() {
                     className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-7 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
                     onClick={downloadDesktop}
                   >
-                    <CloudDownload className="h-4 w-4" /> 下载桌面版
+                    <CloudDownload className="h-4 w-4" /> 下载 {getPlatform()} 版
                   </Button>
                   <Button
                     variant="outline"
@@ -525,22 +544,24 @@ export default function Home() {
                       <TabsContent value="ready" className="flex h-full flex-col">
                         <div className="flex flex-col divide-y divide-sky-100">
                           {readyPlatforms.map((item) => (
-                            <div key={item.name} className="flex flex-wrap items-center gap-3 px-4 py-4">
+                            <div key={item.name} className="flex flex-wrap items-center gap-4 px-4 py-4 sm:flex-nowrap">
                               <div className="min-w-[180px] flex-1 space-y-1">
                                 <p className="text-sm font-semibold text-slate-900">{item.name}</p>
                                 <p className="text-xs text-slate-500">{item.description}</p>
                               </div>
-                              <div className="text-right text-[11px] uppercase tracking-[0.26em] text-slate-400">
-                                版本
-                                <div className="text-sm font-semibold text-sky-600">{item.version}</div>
+                              <div className="flex items-center gap-3 self-start sm:self-center">
+                                <div className="text-right text-[10px] uppercase tracking-[0.24em] text-slate-400 leading-tight">
+                                  <span className="block">版本</span>
+                                  <span className="block text-sm font-semibold text-sky-600">{item.version}</span>
+                                </div>
+                                <Button
+                                  size="sm"
+                                  className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
+                                  onClick={() => item.action?.()}
+                                >
+                                  <CloudDownload className="h-3 w-3" /> {item.cta}
+                                </Button>
                               </div>
-                              <Button
-                                size="sm"
-                                className="ml-auto gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
-                                onClick={() => item.action?.()}
-                              >
-                                <CloudDownload className="h-3 w-3" /> {item.cta}
-                              </Button>
                             </div>
                           ))}
                         </div>
@@ -630,7 +651,7 @@ export default function Home() {
             </Badge>
             <h3 className="text-3xl font-semibold text-slate-900">即刻开启组织知识的智能跃迁</h3>
             <p className="max-w-md text-sm leading-7 text-slate-600">
-              与运幄专家团队共创知识运营蓝图，打造安全可信、持续进化的企业知识大脑。
+              与运幄专家共创知识蓝图，打造安全可信、持续进化的企业知识大脑。
             </p>
           </div>
           <div className="flex flex-col gap-4 md:items-end">
