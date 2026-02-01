@@ -9,6 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
   BadgeCheck,
   BarChart3,
   CloudDownload,
@@ -171,6 +177,22 @@ const osMatrix: osMatrix[] = [
   },
 ];
 
+const availableOS = osMatrix.filter((item) => item.status === "available");
+const upcomingOS = osMatrix.filter((item) => item.status === "upcoming");
+
+const readyPlatforms = availableOS.map((os) => ({
+  name: os.name,
+  description: os.description,
+  version: os.version ?? "即时访问",
+  cta: os.action_str ?? "立即访问",
+  action: os.action,
+}));
+
+const roadmapPlatforms = upcomingOS.map((os) => ({
+  name: os.name,
+  note: os.note ?? "研发中",
+}));
+
 const heroStats = [
   {
     label: "知识架构",
@@ -185,6 +207,25 @@ const heroStats = [
 ];
 
 export default function Home() {
+  const downloadDesktop = () => {
+    if (typeof window === "undefined") return;
+    const ua = window.navigator.userAgent.toLowerCase();
+    const isMac = ua.includes("mac os");
+    const mac = availableOS.find((item) => item.name === "macOS");
+    const win = availableOS.find((item) => item.name === "Windows");
+    if (isMac && mac?.action) {
+      mac.action();
+      return;
+    }
+    if (!isMac && win?.action) {
+      win.action();
+      return;
+    }
+    // fallback to Web if desktop actions missing
+    const web = availableOS.find((item) => item.name === "Web");
+    web?.action?.();
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-sky-50 via-sky-50/40 to-indigo-50 text-slate-900">
       <div className="pointer-events-none absolute inset-0">
@@ -217,7 +258,7 @@ export default function Home() {
                   <span className="block text-slate-900">可执行的企业大脑</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-600">
-                  三级分区、笔记共享与 AI 工具箱合力，配合深度检索、联网搜索与智能分析，确保知识高效、安全、可复用。
+                  笔记系统与 AI 工具箱合力，配合深度检索、联网搜索与智能分析，确保知识高效、安全、可复用；已沉淀 15+ 行业知识库并持续更新。
                 </p>
               </div>
 
@@ -401,61 +442,131 @@ export default function Home() {
         </section>
 
         <section id="platform" className="space-y-12">
-          <div className="space-y-4 text-center">
-            <Badge className="mx-auto w-fit rounded-full bg-linear-to-r from-sky-200 via-blue-200 to-indigo-200 text-[11px] uppercase tracking-[0.3em] text-sky-900 ring-1 ring-sky-300">
-              PLATFORM COVERAGE
-            </Badge>
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">全端覆盖，随时随地唤醒知识能力</h2>
-            <p className="mx-auto max-w-3xl text-base leading-7 text-slate-600">
-              Windows、macOS 与 Web 端提供完整体验，配合 API 与私有化部署策略，帮助企业在安全合规的前提下快速激活知识网络。
-            </p>
-          </div>
+          <Card className="overflow-hidden border border-sky-100 bg-linear-to-br from-white via-sky-50/70 to-blue-50 shadow-[0_24px_80px_-60px_rgba(37,99,235,0.45)]">
+            <CardContent className="grid gap-6 p-8 sm:p-10 lg:grid-cols-2 lg:items-stretch">
+              <div className="flex flex-col gap-6">
+                <div className="space-y-3">
+                  <Badge className="w-fit rounded-full bg-linear-to-r from-sky-200 via-blue-200 to-indigo-200 text-[11px] uppercase tracking-[0.3em] text-sky-900 ring-1 ring-sky-300">
+                    PLATFORM COVERAGE
+                  </Badge>
+                  <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">全端覆盖，随时随地唤醒知识能力</h2>
+                  <p className="max-w-2xl text-base leading-7 text-slate-600">
+                    桌面、Web 即刻可用，API 与私有化部署随时接入；智能体模式在各端保持一致体验，保障安全合规与统一引用。
+                  </p>
+                </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {osMatrix.map((os) => (
-              <Card key={os.name} className="flex h-full flex-col justify-between border border-sky-100 bg-white p-6 shadow-sm">
-                <CardHeader className="p-0">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-xl font-semibold text-slate-900">{os.name}</CardTitle>
-                    {os.status === "available" ? (
-                      <Badge variant="success" className="text-[10px] uppercase tracking-[0.32em] rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-sky-900 ring-sky-200/60">
-                        已支持
-                      </Badge>
-                    ) : (
-                      <Badge variant="neutral" className="text-[10px] uppercase tracking-[0.32em] rounded-full bg-slate-100 text-slate-600 ring-1 ring-slate-200">
-                        研发中
-                      </Badge>
-                    )}
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="flex gap-3 rounded-xl border border-sky-100 bg-white/85 px-4 py-3 shadow-sm">
+                    <CloudDownload className="mt-0.5 h-5 w-5 text-sky-500" />
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-slate-900">桌面/Web 即开即用</p>
+                      <p className="text-xs text-slate-500">同步知识分区与引用，智能体计划保持一致。</p>
+                    </div>
                   </div>
-                  <CardDescription className="mt-3 text-sm leading-7 text-slate-600">
-                    {os.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-4 p-0 pt-6">
-                  {os.status === "available" ? (
-                    <>
-                      <div className="flex items-center justify-between text-xs uppercase tracking-[0.28em] text-slate-400">
-                        <span>最新版本</span>
-                        <span className="text-sm font-semibold text-sky-600">{os.version}</span>
+                  <div className="flex gap-3 rounded-xl border border-sky-100 bg-white/85 px-4 py-3 shadow-sm">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 text-sky-500" />
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-slate-900">私有部署 / API</p>
+                      <p className="text-xs text-slate-500">专属 VPC 或本地化，API 协同内部系统。</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">Windows</span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">macOS</span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">Web</span>
+                  <span className="rounded-full bg-slate-50 px-3 py-1 ring-1 ring-slate-200 text-slate-500">Linux / Android / iOS · 研发中</span>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-7 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
+                    onClick={downloadDesktop}
+                  >
+                    <CloudDownload className="h-4 w-4" /> 下载桌面版
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="gap-2 rounded-full border-sky-200 bg-white px-7 text-sky-700 hover:bg-sky-50"
+                    onClick={() => {
+                      const web = availableOS.find((item) => item.name === "Web");
+                      if (web?.action) web.action();
+                    }}
+                  >
+                    <Network className="h-4 w-4" /> 打开 Web 端
+                  </Button>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <Card className="flex flex-1 flex-col border border-sky-100 bg-white/85 shadow-sm">
+                  <Tabs defaultValue="ready" className="flex h-full flex-col">
+                    <CardHeader className="flex items-center justify-between gap-3 border-b border-sky-50 pb-3">
+                      <div className="flex gap-2 items-center justify-between">
+                        <div className="flex flex-row gap-2 justify-baseline items-center">
+                          <p className="text-sm font-semibold text-slate-900">端点状态</p>
+                          <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-[10px] uppercase tracking-[0.28em] text-sky-900 ring-sky-200/60">
+                            更新中
+                          </Badge>
+                        </div>
+                        <TabsList className="h-7 rounded-full bg-sky-50/90 px-1 py-0.5 shadow-inner">
+                          <TabsTrigger value="ready" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white data-[state=active]:text-sky-700">
+                            已上线
+                          </TabsTrigger>
+                          <TabsTrigger value="roadmap" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white data-[state=active]:text-sky-700">
+                            待上线
+                          </TabsTrigger>
+                        </TabsList>
                       </div>
-                      <Button
-                        className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
-                        onClick={() => {
-                          if (typeof os.action === "function") {
-                            os.action();
-                          }
-                        }}
-                      >
-                        <CloudDownload className="h-4 w-4" /> {os.action_str}
-                      </Button>
-                    </>
-                  ) : (
-                    <p className="text-sm text-slate-500">{os.note ?? "即将推出更多适配方案，欢迎订阅更新。"}</p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    </CardHeader>
+
+                    <CardContent className="flex-1 p-0">
+                      <TabsContent value="ready" className="flex h-full flex-col">
+                        <div className="flex flex-col divide-y divide-sky-100">
+                          {readyPlatforms.map((item) => (
+                            <div key={item.name} className="flex flex-wrap items-center gap-3 px-4 py-4">
+                              <div className="min-w-[180px] flex-1 space-y-1">
+                                <p className="text-sm font-semibold text-slate-900">{item.name}</p>
+                                <p className="text-xs text-slate-500">{item.description}</p>
+                              </div>
+                              <div className="text-right text-[11px] uppercase tracking-[0.26em] text-slate-400">
+                                版本
+                                <div className="text-sm font-semibold text-sky-600">{item.version}</div>
+                              </div>
+                              <Button
+                                size="sm"
+                                className="ml-auto gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
+                                onClick={() => item.action?.()}
+                              >
+                                <CloudDownload className="h-3 w-3" /> {item.cta}
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </TabsContent>
+
+                      <TabsContent value="roadmap" className="flex h-full flex-col">
+                        <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
+                          {roadmapPlatforms.map((item) => (
+                            <div key={item.name} className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-slate-900">{item.name}</span>
+                                <Badge variant="neutral" className="rounded-full bg-white text-[10px] uppercase tracking-[0.26em] text-slate-600 ring-1 ring-slate-200">
+                                  研发中
+                                </Badge>
+                              </div>
+                              <p className="mt-2 text-xs text-slate-500">{item.note}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </TabsContent>
+                    </CardContent>
+                  </Tabs>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         <section className="space-y-12" id="plans">
