@@ -25,6 +25,7 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 type osMatrix = {
   name: string
@@ -259,7 +260,54 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="relative mx-auto flex w-full max-w-7xl flex-col gap-24 px-6 pb-32 pt-24 sm:px-10 md:px-12 lg:px-16 xl:px-20 md:gap-28">
+      <nav className="relative flex flex-col items-center justify-center pt-24 pb-12">
+        <div className="group relative flex flex-col items-center gap-5">
+          {/* 氛围装饰 - 极淡的顶层光晕 */}
+          <div className="absolute -top-20 h-64 w-64 rounded-full bg-sky-100/20 blur-3xl" />
+          
+          <div className="relative flex items-center gap-4 md:gap-6">
+            {/* 增强型品牌图标容器 */}
+            <div className="relative">
+              {/* 悬浮时的背景光晕层 */}
+              <div className="absolute -inset-2 rounded-[24px] bg-linear-to-tr from-sky-400/20 to-indigo-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              
+              <div className="relative flex h-16 w-16 items-center justify-center rounded-[20px] bg-linear-to-br from-white/95 to-sky-50/50 p-3 shadow-[0_8px_30px_-4px_rgba(14,165,233,0.1)] ring-1 ring-sky-100/50 backdrop-blur-xl transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_40px_-12px_rgba(14,165,233,0.25)] group-hover:ring-sky-200/50">
+                <Image 
+                  src="/icon_transparent.png" 
+                  alt="运幄 AI 知识库" 
+                  width={64}
+                  height={64}
+                  priority
+                  className="h-full w-full object-contain drop-shadow-[0_2px_8px_rgba(14,165,233,0.15)]" 
+                />
+                
+                {/* 装饰性的动态状态点 */}
+                <div className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow-sm">
+                  <div className="h-2 w-2 animate-pulse rounded-full bg-linear-to-r from-sky-400 to-blue-500" />
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex flex-col justify-center">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
+                运幄 <span className="bg-linear-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">AI 知识库</span>
+              </h1>
+              <div className="flex items-center gap-2 ml-1 mt-1.5 transition-opacity duration-500 group-hover:opacity-80">
+                <span className="text-[10px] uppercase tracking-[0.45em] text-slate-400 font-semibold">
+                  Intelligent Enterprise Brain
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          {/* 极简装饰线，增加平衡感 */}
+          <div className="relative h-px w-40 overflow-hidden rounded-full bg-slate-200/40">
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-sky-400 to-transparent opacity-40" />
+          </div>
+        </div>
+      </nav>
+
+      <main className="relative mx-auto flex w-full max-w-7xl flex-col gap-24 px-6 pb-32 pt-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 md:gap-28">
         <section className="relative isolate overflow-hidden">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute -left-32 top-0 h-80 w-80 rounded-full" />
@@ -300,10 +348,10 @@ export default function Home() {
                   size="lg"
                   className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-8 text-white shadow-[0_18px_45px_-28px_rgba(37,99,235,0.55)] hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
                   onClick={() => {
-                    window.location.href = "mailto:mengwj12345@163.com";
+                    window.location.href = "#platform";
                   }}
                 >
-                  <Sparkles className="h-4 w-4" /> 预约演示
+                  <Sparkles className="h-4 w-4" /> 立即下载
                 </Button>
                 <Button
                   variant="outline"
@@ -393,9 +441,6 @@ export default function Home() {
                 运幄围绕高效检索、协作共享、数据驱动优化与系统集成等核心优势，帮助团队在完整的知识生命周期内保持内容更新与价值延展。
               </p>
             </div>
-            <Button variant="outline" className="h-11 rounded-full border-sky-200 bg-white px-6 text-sky-700 hover:bg-sky-100" asChild>
-              <Link href="#platform">查看全端支撑</Link>
-            </Button>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
