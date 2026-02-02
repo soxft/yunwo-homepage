@@ -1,7 +1,6 @@
 "use client"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -27,6 +26,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 type osMatrix = {
   name: string
@@ -211,6 +211,7 @@ const heroStats = [
 export default function Home() {
 
   type Plat = "windows" | "macos";
+
   const [platform, setPlatform] = useState<Plat | "unknown">("unknown");
 
   useEffect(() => {
@@ -229,6 +230,7 @@ export default function Home() {
   }, []);
 
   const downloadDesktop = () => {
+
     const mac = availableOS.find((item) => item.name === "macOS");
     const win = availableOS.find((item) => item.name === "Windows");
 
@@ -268,7 +270,7 @@ export default function Home() {
             {/* 增强型品牌图标容器 */}
             <div className="relative">
               {/* 悬浮时的背景光晕层 */}
-              <div className="absolute -inset-2 rounded-3xl bg-linear-to-tr from-sky-400/20 to-indigo-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute -inset-2 rounded-[24px] bg-linear-to-tr from-sky-400/20 to-indigo-400/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               
               <div className="relative flex h-16 w-16 items-center justify-center rounded-[20px] bg-linear-to-br from-white/95 to-sky-50/50 p-3 shadow-[0_8px_30px_-4px_rgba(14,165,233,0.1)] ring-1 ring-sky-100/50 backdrop-blur-xl transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_40px_-12px_rgba(14,165,233,0.25)] group-hover:ring-sky-200/50">
                 <Image 
@@ -330,13 +332,13 @@ export default function Home() {
 
               <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
                 {featureHighlights.map((feature) => (
-                  <div key={feature.title} className="flex items-start gap-3 rounded-xl border border-sky-100/50 bg-white/40 backdrop-blur-md px-4 py-3 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.05)] transition-all duration-300 hover:bg-white/60 hover:shadow-[0_12px_40px_-15px_rgba(37,99,235,0.2)]">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-50/50 text-sky-600 backdrop-blur-sm">
+                  <div key={feature.title} className="flex items-start gap-3 rounded-xl border border-sky-100 bg-white/80 px-4 py-3 shadow-[0_10px_40px_-30px_rgba(37,99,235,0.45)]">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sky-600">
                       <feature.icon className="h-4 w-4" />
                     </div>
                     <div className="space-y-1">
                       <p className="text-sm font-semibold text-slate-900">{feature.title}</p>
-                      <p className="text-xs text-slate-500/90">{feature.description}</p>
+                      <p className="text-xs text-slate-500">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -366,19 +368,19 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <Card className="relative w-full border border-sky-100/50 bg-white/30 backdrop-blur-xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)]">
+              <Card className="relative w-full border border-sky-100/80 bg-white/80">
                 <CardContent className="flex h-full flex-col gap-6 p-8">
                   <div className="flex flex-wrap gap-2">
                     {workspaceTags.map((tag) => (
-                      <Badge key={tag} className="rounded-full bg-sky-50/50 text-sky-700 ring-1 ring-sky-100/50 backdrop-blur-sm">
+                      <Badge key={tag} className="rounded-full bg-sky-50 text-sky-700 ring-1 ring-sky-100">
                         {tag}
                       </Badge>
                     ))}
                   </div>
 
-                  <div className="rounded-2xl border border-sky-100/50 bg-sky-50/40 backdrop-blur-md p-5 shadow-inner">
+                  <div className="rounded-2xl border border-sky-100/80 bg-sky-50/70 p-5">
                     <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/60 text-sky-600 shadow-sm backdrop-blur-sm">
+                      <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sky-600 shadow-inner">
                         <Sparkles className="h-5 w-5" />
                       </div>
                       <div className="flex-1 space-y-2">
@@ -389,8 +391,8 @@ export default function Home() {
                         <p className="text-xs text-slate-500">
                           选择文件夹后，先生成执行计划再逐步检索与调用工具，自动输出摘要并标注引用；可随时切换联网搜索补足最新信息。
                         </p>
-                        <div className="h-2 rounded-full bg-white/40 shadow-inner overflow-hidden">
-                          <div className="h-full w-[78%] rounded-full bg-linear-to-r from-sky-400 via-blue-500 to-indigo-500" />
+                        <div className="h-2 rounded-full bg-white/80 shadow-inner">
+                          <div className="h-full w-[78%] rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500" />
                         </div>
                         <p className="text-[11px] text-slate-400">
                           建议勾选行业/企业分区并上传关键模板，智能体会在计划中优先引用，提升命中率与完整度。
@@ -401,7 +403,7 @@ export default function Home() {
 
                   <div className="grid gap-4 md:grid-cols-2">
                     {heroStats.map((stat) => (
-                      <div key={stat.label} className="rounded-2xl border border-white/40 bg-white/20 p-4 shadow-sm backdrop-blur-md">
+                      <div key={stat.label} className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
                         <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">{stat.label}</p>
                         <p className="mt-2 text-lg font-semibold text-slate-900">{stat.value}</p>
                         <p className="text-xs text-slate-500">{stat.description}</p>
@@ -409,16 +411,16 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-sky-50/40 backdrop-blur-md px-4 py-3 text-sm text-slate-700">
+                  <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-sky-50/80 px-4 py-3 text-sm text-slate-700">
                     <span className="flex items-center gap-2 text-slate-700">
                       <Network className="h-4 w-4 text-sky-500" />
                       <span>桌面 / Web</span>
                     </span>
                     <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200/60 to-blue-300/60 text-sky-900 ring-sky-200/40 backdrop-blur-sm">
+                      <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-sky-900 ring-sky-200/60">
                         Enterprise Ready
                       </Badge>
-                      <Badge className="rounded-full bg-white/40 text-sky-700 ring-1 ring-sky-100/50 backdrop-blur-sm">
+                      <Badge className="rounded-full bg-white text-sky-700 ring-1 ring-sky-100">
                         深度检索 · 联网搜索
                       </Badge>
                     </div>
@@ -446,36 +448,36 @@ export default function Home() {
             {capabilityCards.map((capability) => (
               <Card
                 key={capability.title}
-                className="group relative h-full overflow-hidden border border-white/30 bg-white/20 p-7 backdrop-blur-lg transition-all duration-500 hover:-translate-y-2 hover:bg-white/30 hover:shadow-[0_40px_80px_-30px_rgba(37,99,235,0.25)]"
+                className="group relative h-full overflow-hidden border border-sky-100 bg-white p-7 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-45px_rgba(37,99,235,0.45)]"
               >
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-40">
-                  <div className="h-full w-full bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.3)_0%,transparent_70%)]" />
+                <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-30">
+                  <div className="h-full w-full bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.22)_0%,transparent_70%)]" />
                 </div>
                 <div className="relative flex flex-col gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50/50 text-sky-600 backdrop-blur-sm shadow-sm ring-1 ring-white/50">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100 text-sky-600">
                     <capability.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900">{capability.title}</h3>
-                  <p className="text-sm leading-7 text-slate-600/90">{capability.description}</p>
+                  <p className="text-sm leading-7 text-slate-600">{capability.description}</p>
                 </div>
               </Card>
             ))}
           </div>
 
-          <Card className="relative overflow-hidden border border-white/40 bg-white/10 backdrop-blur-2xl">
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-sky-200/20 via-transparent to-indigo-200/20" />
+          <Card className="relative overflow-hidden border border-sky-100 bg-white">
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-sky-100 via-transparent to-blue-100" />
             <CardContent className="relative flex flex-col gap-10 p-10 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl space-y-4">
-                <Badge variant="success" className="w-fit rounded-full bg-linear-to-r from-sky-300/40 to-blue-400/40 text-sky-900 ring-sky-300/30 backdrop-blur-md">
+                <Badge variant="success" className="w-fit rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-sky-900 ring-sky-200/60">
                   数据驱动 · 持续进化
                 </Badge>
                 <h3 className="text-3xl font-semibold text-slate-900">将知识资产化，实时洞察业务反馈</h3>
-                <p className="text-base leading-7 text-slate-600/90">
+                <p className="text-base leading-7 text-slate-600">
                   内建指标矩阵洞察内容热度、知识缺口与检索命中率；结合自动化治理策略，驱动知识库在每一次反馈中自我优化。
                 </p>
               </div>
               <div className="grid w-full gap-5 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/40 bg-white/20 p-5 shadow-sm backdrop-blur-md transition-transform hover:scale-[1.02]">
+                <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                   <div className="flex items-center gap-3">
                     <CloudDownload className="h-8 w-8 text-sky-500" />
                     <div>
@@ -483,11 +485,11 @@ export default function Home() {
                       <p className="text-lg font-semibold text-slate-900">桌面端 / 网页端</p>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm text-slate-600/80 leading-relaxed">
+                  <p className="mt-4 text-sm text-slate-600">
                     桌面软件与网页方式并行提供，保持知识库在不同设备间的同步体验。
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/40 bg-white/20 p-5 shadow-sm backdrop-blur-md transition-transform hover:scale-[1.02]">
+                <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                   <div className="flex items-center gap-3">
                     <Users className="h-8 w-8 text-sky-500" />
                     <div>
@@ -495,7 +497,7 @@ export default function Home() {
                       <p className="text-lg font-semibold text-slate-900">共享与协作</p>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm text-slate-600/80 leading-relaxed">
+                  <p className="mt-4 text-sm text-slate-600">
                     多人协作与知识共享能力，让团队能够在同一空间持续沉淀与传递内容。
                   </p>
                 </div>
@@ -505,53 +507,53 @@ export default function Home() {
         </section>
 
         <section id="platform" className="space-y-12">
-          <Card className="overflow-hidden border border-white/40 bg-white/20 backdrop-blur-2xl shadow-[0_24px_80px_-40px_rgba(37,99,235,0.2)]">
+          <Card className="overflow-hidden border border-sky-100 bg-linear-to-br from-white via-sky-50/70 to-blue-50 shadow-[0_24px_80px_-60px_rgba(37,99,235,0.45)]">
             <CardContent className="grid gap-6 p-8 sm:p-10 lg:grid-cols-2 lg:items-stretch">
               <div className="flex flex-col gap-6">
                 <div className="space-y-3">
-                  <Badge className="w-fit rounded-full bg-linear-to-r from-sky-200/50 via-blue-200/50 to-indigo-200/50 text-[11px] uppercase tracking-[0.3em] text-sky-900 ring-1 ring-white/50 backdrop-blur-sm">
+                  <Badge className="w-fit rounded-full bg-linear-to-r from-sky-200 via-blue-200 to-indigo-200 text-[11px] uppercase tracking-[0.3em] text-sky-900 ring-1 ring-sky-300">
                     PLATFORM COVERAGE
                   </Badge>
                   <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">全端覆盖，随时随地唤醒知识能力</h2>
-                  <p className="max-w-2xl text-base leading-7 text-slate-600/80">
+                  <p className="max-w-2xl text-base leading-7 text-slate-600">
                     桌面、Web 即刻可用，API 与私有化部署随时接入；智能体模式在各端保持一致体验，保障安全合规与统一引用。
                   </p>
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="flex gap-3 rounded-xl border border-white/40 bg-white/30 backdrop-blur-md px-4 py-3 shadow-sm transition-all hover:bg-white/50">
+                  <div className="flex gap-3 rounded-xl border border-sky-100 bg-white/85 px-4 py-3 shadow-sm">
                     <CloudDownload className="mt-0.5 h-5 w-5 text-sky-500" />
                     <div className="space-y-1">
                       <p className="text-sm font-semibold text-slate-900">桌面/Web 即开即用</p>
-                      <p className="text-xs text-slate-500/80">同步知识分区与引用，智能体计划保持一致。</p>
+                      <p className="text-xs text-slate-500">同步知识分区与引用，智能体计划保持一致。</p>
                     </div>
                   </div>
-                  <div className="flex gap-3 rounded-xl border border-white/40 bg-white/30 backdrop-blur-md px-4 py-3 shadow-sm transition-all hover:bg-white/50">
+                  <div className="flex gap-3 rounded-xl border border-sky-100 bg-white/85 px-4 py-3 shadow-sm">
                     <ShieldCheck className="mt-0.5 h-5 w-5 text-sky-500" />
                     <div className="space-y-1">
                       <p className="text-sm font-semibold text-slate-900">私有部署 / API</p>
-                      <p className="text-xs text-slate-500/80">专属 VPC 或本地化，API 协同内部系统。</p>
+                      <p className="text-xs text-slate-500">专属 VPC 或本地化，API 协同内部系统。</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
-                  <span className="rounded-full bg-white/40 px-3 py-1 ring-1 ring-white/50 text-sky-700 backdrop-blur-sm">Windows</span>
-                  <span className="rounded-full bg-white/40 px-3 py-1 ring-1 ring-white/50 text-sky-700 backdrop-blur-sm">macOS</span>
-                  <span className="rounded-full bg-white/40 px-3 py-1 ring-1 ring-white/50 text-sky-700 backdrop-blur-sm">Web</span>
-                  <span className="rounded-full bg-slate-50/40 px-3 py-1 ring-1 ring-slate-200/50 text-slate-500 backdrop-blur-sm">Linux / Android / iOS · 研发中</span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">Windows</span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">macOS</span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-sky-100 text-sky-700">Web</span>
+                  <span className="rounded-full bg-slate-50 px-3 py-1 ring-1 ring-slate-200 text-slate-500">Linux / Android / iOS · 研发中</span>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
                   <Button
-                    className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-7 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400 shadow-lg shadow-sky-500/20"
+                    className="gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-7 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
                     onClick={downloadDesktop}
                   >
-                    <CloudDownload className="h-4 w-4" /> 下载 {platform === 'unknown' ? '桌面' : platform === 'macos' ? 'macOS' : 'Windows'} 版
+                    <CloudDownload className="h-4 w-4" /> 下载 {platform} 版
                   </Button>
                   <Button
                     variant="outline"
-                    className="gap-2 rounded-full border-white/40 bg-white/30 backdrop-blur-sm px-7 text-sky-700 hover:bg-white/50 hover:text-sky-800"
+                    className="gap-2 rounded-full border-sky-200 bg-white px-7 text-sky-700 hover:bg-sky-50"
                     onClick={() => {
                       const web = availableOS.find((item) => item.name === "Web");
                       if (web?.action) web.action();
@@ -563,21 +565,21 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <Card className="flex flex-1 flex-col border border-white/40 bg-white/30 backdrop-blur-xl shadow-sm overflow-hidden">
+                <Card className="flex flex-1 flex-col border border-sky-100 bg-white/85 shadow-sm">
                   <Tabs defaultValue="ready" className="flex h-full flex-col">
-                    <CardHeader className="flex items-center justify-between gap-3 border-b border-white/20 pb-3 bg-white/10">
+                    <CardHeader className="flex items-center justify-between gap-3 border-b border-sky-50 pb-3">
                       <div className="flex gap-2 items-center justify-between">
                         <div className="flex flex-row gap-2 justify-baseline items-center">
                           <p className="text-sm font-semibold text-slate-900">端点状态</p>
-                          <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200/60 to-blue-300/60 text-[10px] uppercase tracking-[0.28em] text-sky-900 ring-sky-200/40 backdrop-blur-sm">
+                          <Badge variant="success" className="rounded-full bg-linear-to-r from-sky-200 to-blue-300 text-[10px] uppercase tracking-[0.28em] text-sky-900 ring-sky-200/60">
                             更新中
                           </Badge>
                         </div>
-                        <TabsList className="h-7 rounded-full bg-sky-50/40 px-1 py-0.5 shadow-inner backdrop-blur-sm">
-                          <TabsTrigger value="ready" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white/80 data-[state=active]:text-sky-700 data-[state=active]:shadow-sm">
+                        <TabsList className="h-7 rounded-full bg-sky-50/90 px-1 py-0.5 shadow-inner">
+                          <TabsTrigger value="ready" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white data-[state=active]:text-sky-700">
                             已上线
                           </TabsTrigger>
-                          <TabsTrigger value="roadmap" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white/80 data-[state=active]:text-sky-700 data-[state=active]:shadow-sm">
+                          <TabsTrigger value="roadmap" className="h-5 min-w-0 rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none sm:min-w-0 sm:px-1.5 sm:py-0.5 sm:text-[9px] data-[state=active]:bg-white data-[state=active]:text-sky-700">
                             待上线
                           </TabsTrigger>
                         </TabsList>
@@ -586,12 +588,12 @@ export default function Home() {
 
                     <CardContent className="flex-1 p-0">
                       <TabsContent value="ready" className="flex h-full flex-col">
-                        <div className="flex flex-col divide-y divide-white/20">
+                        <div className="flex flex-col divide-y divide-sky-100">
                           {readyPlatforms.map((item) => (
-                            <div key={item.name} className="flex flex-wrap items-center gap-4 px-4 py-4 sm:flex-nowrap hover:bg-white/20 transition-colors">
+                            <div key={item.name} className="flex flex-wrap items-center gap-4 px-4 py-4 sm:flex-nowrap">
                               <div className="min-w-[180px] flex-1 space-y-1">
                                 <p className="text-sm font-semibold text-slate-900">{item.name}</p>
-                                <p className="text-xs text-slate-500/80">{item.description}</p>
+                                <p className="text-xs text-slate-500">{item.description}</p>
                               </div>
                               <div className="flex items-center gap-3 self-start sm:self-center">
                                 <div className="w-20 text-right text-[10px] uppercase tracking-[0.24em] text-slate-400 leading-tight">
@@ -600,7 +602,7 @@ export default function Home() {
                                 </div>
                                 <Button
                                   size="sm"
-                                  className="min-w-[150px] justify-center gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400 shadow-md shadow-sky-500/20"
+                                  className="min-w-[150px] justify-center gap-2 rounded-full bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 px-3 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400"
                                   onClick={() => item.action?.()}
                                 >
                                   <CloudDownload className="h-3 w-3" /> {item.cta}
@@ -614,14 +616,14 @@ export default function Home() {
                       <TabsContent value="roadmap" className="flex h-full flex-col">
                         <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
                           {roadmapPlatforms.map((item) => (
-                            <div key={item.name} className="rounded-xl border border-white/30 bg-white/10 px-4 py-3 text-sm text-slate-600 backdrop-blur-sm transition-all hover:bg-white/20">
+                            <div key={item.name} className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">
                               <div className="flex items-center justify-between">
                                 <span className="font-semibold text-slate-900">{item.name}</span>
-                                <Badge variant="neutral" className="rounded-full bg-white/40 text-[10px] uppercase tracking-[0.26em] text-slate-600 ring-1 ring-white/50 backdrop-blur-sm">
+                                <Badge variant="neutral" className="rounded-full bg-white text-[10px] uppercase tracking-[0.26em] text-slate-600 ring-1 ring-slate-200">
                                   研发中
                                 </Badge>
                               </div>
-                              <p className="mt-2 text-xs text-slate-500/80">{item.note}</p>
+                              <p className="mt-2 text-xs text-slate-500">{item.note}</p>
                             </div>
                           ))}
                         </div>
@@ -649,21 +651,21 @@ export default function Home() {
             {plans.map((plan) => (
               <Card
                 key={plan.name}
-                className="flex h-full flex-col justify-between border border-white/40 bg-white/20 p-7 backdrop-blur-xl shadow-[0_30px_80px_-50px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-2 hover:bg-white/30"
+                className="flex h-full flex-col justify-between border border-sky-100 bg-white p-7 shadow-[0_30px_80px_-55px_rgba(37,99,235,0.45)]"
               >
                 <CardHeader className="space-y-4 p-0">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-2xl font-semibold text-slate-900">{plan.name}</CardTitle>
-                    <Badge variant="neutral" className="text-xs uppercase tracking-[0.32em] rounded-full bg-white/40 text-slate-600 ring-1 ring-white/50 backdrop-blur-sm">
+                    <Badge variant="neutral" className="text-xs uppercase tracking-[0.32em] rounded-full bg-slate-100 text-slate-600 ring-1 ring-slate-200">
                       {plan.price}
                     </Badge>
                   </div>
-                  <CardDescription className="text-sm leading-7 text-slate-600/90">
+                  <CardDescription className="text-sm leading-7 text-slate-600">
                     {plan.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col gap-5 p-0 pt-4">
-                  <ul className="space-y-3 text-sm text-slate-600/90">
+                  <ul className="space-y-3 text-sm text-slate-600">
                     {plan.highlights.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-500" />
@@ -672,7 +674,7 @@ export default function Home() {
                     ))}
                   </ul>
                   <Button
-                    className={`mt-auto gap-2 rounded-full px-8 text-sm shadow-lg ${plan.name === "私有部署" ? "bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 text-white hover:shadow-sky-500/30" : "border-white/40 bg-white/30 text-sky-700 hover:bg-white/50 shadow-sm"}`}
+                    className={`mt-auto gap-2 rounded-full px-8 text-sm ${plan.name === "私有部署" ? "bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 text-white hover:from-sky-400 hover:via-blue-400 hover:to-indigo-400" : "border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-100"}`}
                     variant={plan.name === "私有部署" ? "default" : "outline"}
                     onClick={() => {
                       window.location.href = "mailto:mengwj12345@163.com";
